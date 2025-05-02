@@ -2,7 +2,7 @@ DOMAIN = "star"
 
 # STEP USER
 CONF_API_KEY = "api_key"
-CONF_UPDATE_INTERVAL = "update_interval"
+CONF_BUS_NUMBER = "bus_number"
 
 LINE_API_URL = "https://data.explore.star.fr/api/explore/v2.1/catalog/datasets/tco-bus-topologie-li\
     gnes-td/records?select=nomcourt%2Cnomlong&where=nomfamillecommerciale%3D%27CHRONOSTAR%27%20OR%2\
