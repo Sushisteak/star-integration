@@ -29,13 +29,27 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             selected_line = user_input[CONF_BUS_NUMBER]
             additional_data = await StarApi._fetch_directions(selected_line)
             _LOGGER.debug("Result _fetch_directions: %s", additional_data)
-    
-        data_schema = {
-            vol.Required(CONF_API_KEY): str,
-            vol.Required(CONF_BUS_NUMBER): vol.In(options),
-        }
+            #return await self.async_step_direction()
+
+        data_schema = vol.Schema({
+                vol.Required(CONF_API_KEY): str,
+                vol.Required(CONF_BUS_NUMBER): vol.In(options),
+            })
 
         return self.async_show_form(
             step_id="user", 
             data_schema=data_schema
         )
+    
+    # Etape 2 - Direction de la ligne choisie
+    #async def async_step_direction(self, user_input=None):
+    #    """Get the direction of the line."""
+#
+    #    return self.async_show_form(
+    #        step_id="stop",
+    #        data_schema=vol.Schema({
+    #            vol.Required(CONF_STOP): vol.In(stop_options),
+    #            vol.Optional(CONF_UPDATE_INTERVAL, default=DEFAULT_UPDATE_INTERVAL): int,
+    #        }),
+    #        errors=errors,
+    #    )
