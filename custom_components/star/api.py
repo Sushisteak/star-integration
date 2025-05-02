@@ -11,7 +11,7 @@ _LOGGER = logging.getLogger(__name__)
 
 class StarApi():
     # Récupération des lignes pour l'étape 1
-    async def _fetch_bus_lines(self) -> dict[str, str]:
+    async def _fetch_bus_lines() -> dict[str, str]:
         """Call STAR API to get all the lines."""
         async with aiohttp.ClientSession() as session:
             async with session.get(LINE_API_URL) as resp:
