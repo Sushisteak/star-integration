@@ -24,7 +24,7 @@ class StarApi():
                 ]
 
     # Récupération des directions de la ligne choisie pour l'étape 2
-    async def _fetch_directions(self, nomcourt: str) -> list[tuple[str, str]]:
+    async def _fetch_directions(nomcourt: str) -> list[tuple[str, str]]:
         """Call STAR API to get all direction of one line."""
         _LOGGER.debug("Fetching directions for line: %s", nomcourt)
         async with aiohttp.ClientSession() as session:

@@ -25,6 +25,11 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         raw_lines = await StarApi._fetch_bus_lines()
         options = {code: f"{name}" for code, name in raw_lines}
 
+        if user_input is not None:
+            selected_line = user_input[CONF_BUS_NUMBER]
+            additional_data = await StarApi._fetch_directions(selected_line)
+            _LOGGER.debug("Result _fetch_directions: %s", additional_data)
+    
         data_schema = {
             vol.Required(CONF_API_KEY): str,
             vol.Required(CONF_BUS_NUMBER): vol.In(options),
