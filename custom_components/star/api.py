@@ -13,9 +13,11 @@ class StarApi():
     # Récupération des lignes pour l'étape 1
     async def _fetch_bus_lines() -> dict[str, str]:
         """Call STAR API to get all the lines."""
+        _LOGGER.error("Calling _fetch_bus_lines function")
         async with aiohttp.ClientSession() as session:
             async with session.get(LINE_API_URL) as resp:
                 data = await resp.json()
+                _LOGGER.error("_fetch_bus_lines data : %s", data)
                 return [
                     (item["nomcourt"], f'{item["nomcourt"]} - {item["nomlong"]}')
                     for item in data.get("results", [])
