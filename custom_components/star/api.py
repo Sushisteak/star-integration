@@ -16,6 +16,10 @@ class StarApi():
         _LOGGER.error("Calling _fetch_bus_lines function")
         async with aiohttp.ClientSession() as session:
             async with session.get(LINE_API_URL) as resp:
+                if resp.status != 200:
+                    text = await resp.text()
+                    _LOGGER.error("Lines API error %s: %s", resp.status, text)
+                    return []
                 data = await resp.json()
                 _LOGGER.error("_fetch_bus_lines data : %s", data)
                 return [

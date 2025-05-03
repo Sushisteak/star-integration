@@ -25,8 +25,14 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_user(self, user_input=None):
         """Get the API token and line number."""
 
+        errors = {}
+
         # Get all bus lines
         raw_lines = await StarApi._fetch_bus_lines()
+
+        if not raw_lines:
+            errors["bus_number"] = "no_line_found"
+
         options = {code: f"{name}" for code, name in raw_lines}
 
         # Go to step direction
@@ -42,12 +48,15 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         return self.async_show_form(
             step_id="user", 
-            data_schema=data_schema
+            data_schema=data_schema,
+            errors=errors
         )
     
     # Etape 2 - Direction de la ligne choisie
     async def async_step_direction(self, user_input=None):
         """Get the direction of the line."""
+
+        errors = {}
 
         bus_number = self._config_flow_data[CONF_BUS_NUMBER]
         _LOGGER.debug("Bus selected in previous step: %s", bus_number)
@@ -79,7 +88,8 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         
         return self.async_show_form(
             step_id="direction",
-            data_schema=data_schema
+            data_schema=data_schema,
+            errors=errors
         )
     
     # Etape 3 - Selection arret
@@ -87,6 +97,8 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         """Get the stop of the line to monitor."""
         _LOGGER.debug("in async_step_stop function")
         
+        errors = {}
+
         line_stops = await StarApi._fetch_stops(self._config_flow_data[CONF_DIRECTION])
         _LOGGER.debug("All stops fetched : %s", line_stops)
 
@@ -107,5 +119,7 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         return self.async_show_form(
             step_id="stop",
-            data_schema=data_schema
+            data_schema=data_schema,
+            errors=errors
         )
+        
