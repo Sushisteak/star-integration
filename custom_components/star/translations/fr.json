@@ -39,9 +39,9 @@
             }
         },
         "error": {
-            "no_line_found": "Impossible de récupérer les lignes de bus. Veuillez vérifier les logs d'erreur de Home Assistant.",
-            "no_direction_found": "Impossible de récupérer les directions de la ligne de bus sélectionnée. Veuillez vérifier les logs d'erreur de Home Assistant.",
-            "no_stop_found": "Impossible de récupérer les arrêts de la ligne de bus sélectionnée dans la direction souhaitée. Veuillez vérifier les logs de d'erreur de Home Assistant."
+            "no_line_found": "Impossible de récupérer les lignes de bus. Veuillez vérifier les logs d'erreurs de Home Assistant.",
+            "no_direction_found": "Impossible de récupérer les directions de la ligne de bus sélectionnée. Veuillez vérifier les logs d'erreurs de Home Assistant.",
+            "no_stop_found": "Impossible de récupérer les arrêts de la ligne de bus sélectionnée dans la direction souhaitée. Veuillez vérifier les logs de d'erreurs de Home Assistant."
         }
     }
 }
