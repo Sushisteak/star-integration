@@ -26,6 +26,7 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         raw_lines = await StarApi._fetch_bus_lines()
         options = {code: f"{name}" for code, name in raw_lines}
 
+        # Go to step direction
         if user_input is not None:
             self._first_step_data = user_input
             return await self.async_step_direction()
