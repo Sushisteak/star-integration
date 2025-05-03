@@ -92,6 +92,9 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         stop_options = {stop: stop for stop in line_stops}
 
+        if user_input is not None:
+            _LOGGER.debug("Stop selected : %s", user_input[CONF_STOP])
+        
         data_schema = vol.Schema({
             vol.Required(CONF_STOP): vol.In(stop_options),
         })
