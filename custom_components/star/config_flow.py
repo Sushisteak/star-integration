@@ -7,6 +7,8 @@ from .api import StarApi
 from .const import (
     DOMAIN,
     CONF_API_KEY,
+    CONF_UPDATE_INTERVAL,
+    DEFAULT_UPDATE_INTERVAL,
     CONF_BUS_NUMBER,
     CONF_DIRECTION
 )
@@ -28,11 +30,12 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         # Go to step direction
         if user_input is not None:
-            self._first_step_data = user_input
+            self._config_flow_data = user_input
             return await self.async_step_direction()
 
         data_schema = vol.Schema({
                 vol.Required(CONF_API_KEY): str,
+                vol.Optional(CONF_UPDATE_INTERVAL, default=DEFAULT_UPDATE_INTERVAL): int,
                 vol.Required(CONF_BUS_NUMBER): vol.In(options),
             })
 
@@ -45,18 +48,30 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_direction(self, user_input=None):
         """Get the direction of the line."""
 
-        bus_number = self._first_step_data[CONF_BUS_NUMBER]
+        bus_number = self._config_flow_data[CONF_BUS_NUMBER]
         _LOGGER.debug("Bus selected in previous step: %s", bus_number)
         directions = await StarApi._fetch_directions(bus_number)
         _LOGGER.debug("All directions retrieve from _fetch_directions : %s", directions)
 
         # Crée les dictionnaires nécessaires
         direction_options = {}
-        direction_arrivals = {}
+        direction_destination = {}
         for direction_id, label, arrival in directions:
             direction_options[direction_id] = label
-            direction_arrivals[direction_id] = arrival
+            direction_destination[direction_id] = arrival
 
+        # Go to step stop
+        if user_input is not None:
+            _LOGGER.debug("User selected direction: %s", user_input)
+            direction_id = user_input[CONF_DIRECTION]
+
+            self._config_flow_data.update({
+                CONF_DIRECTION: direction_id,
+                "direction_label": direction_options[direction_id],
+                "direction_arrival_stop": direction_destination[direction_id],
+            })
+            return await self.async_step_stop()
+        
         data_schema = vol.Schema({
                 vol.Required(CONF_DIRECTION): vol.In(direction_options),
             })
@@ -65,3 +80,8 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             step_id="direction",
             data_schema=data_schema
         )
+    
+    # Etape 3 - Selection arret
+    async def async_step_stop(self, user_input=None):
+        """Get the stop of the line to monitor."""
+        errors = {}
