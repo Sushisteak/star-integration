@@ -97,9 +97,9 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             self._config_flow_data.update({
                 CONF_STOP: user_input[CONF_STOP]
             })
-            title = f"{self._config_flow_data[CONF_BUS_NUMBER]} - {self._user_data[CONF_STOP]} → \
-                {self._user_data['direction_arrival_stop']}"
-            return self.async_create_entry(title=title, data=self._user_data)
+            title = f"{self._config_flow_data[CONF_BUS_NUMBER]} - {self._config_flow_data[CONF_STOP]} → \
+                {self._config_flow_data['direction_arrival_stop']}"
+            return self.async_create_entry(title=title, data=self._config_flow_data)
 
         data_schema = vol.Schema({
             vol.Required(CONF_STOP): vol.In(stop_options),
