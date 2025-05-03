@@ -61,6 +61,10 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         bus_number = self._config_flow_data[CONF_BUS_NUMBER]
         _LOGGER.debug("Bus selected in previous step: %s", bus_number)
         directions = await StarApi._fetch_directions(bus_number)
+        
+        if not directions:
+            errors["direction"] = "no_direction_found"
+
         _LOGGER.debug("All directions retrieve from _fetch_directions : %s", directions)
 
         # Crée les dictionnaires nécessaires
@@ -100,6 +104,10 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         errors = {}
 
         line_stops = await StarApi._fetch_stops(self._config_flow_data[CONF_DIRECTION])
+
+        if not line_stops:
+            errors["stop"] = "no_stop_found"
+        
         _LOGGER.debug("All stops fetched : %s", line_stops)
 
         stop_options = {stop: stop for stop in line_stops}
