@@ -10,7 +10,8 @@ from .const import (
     CONF_UPDATE_INTERVAL,
     DEFAULT_UPDATE_INTERVAL,
     CONF_BUS_NUMBER,
-    CONF_DIRECTION
+    CONF_DIRECTION,
+    CONF_STOP
 )
 _LOGGER = logging.getLogger(__name__)
 
@@ -86,5 +87,16 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         """Get the stop of the line to monitor."""
         _LOGGER.debug("in async_step_stop function")
         
-        stops = await StarApi._fetch_stops(self._config_flow_data[CONF_DIRECTION])
-        _LOGGER.debug("All stops fetched : %s", stops)
+        line_stops = await StarApi._fetch_stops(self._config_flow_data[CONF_DIRECTION])
+        _LOGGER.debug("All stops fetched : %s", line_stops)
+
+        stop_options = {stop: stop for stop in line_stops}
+
+        data_schema = vol.Schema({
+            vol.Required(CONF_STOP): vol.In(stop_options),
+        })
+
+        return self.async_show_form(
+            step_id="stop",
+            data_schema=data_schema
+        )
