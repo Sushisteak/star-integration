@@ -86,5 +86,5 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         """Get the stop of the line to monitor."""
         _LOGGER.debug("in async_step_stop function")
         
-        stops = await self._fetch_stops(self._config_flow_data[CONF_DIRECTION])
+        stops = await StarApi._fetch_stops(self._config_flow_data[CONF_DIRECTION])
         _LOGGER.debug("All stops fetched : %s", stops)
