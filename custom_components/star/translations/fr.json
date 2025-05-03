@@ -16,6 +16,10 @@
                     "update_interval": "Fréquence de mise à jour en seconde. Ce n'est pas utile de mettre en dessous de 30 secondes, les données du STAR sont mises à jour toutes les minutes.",
                     "bus_number": "Nom de la ligne de bus (ex : C4, C5…)."
                 }
+            },
+            "direction": {
+                "title": "Sens de le ligne",
+                "description": "Séléctionnez la direction de la ligne."
             }
         }
     }
