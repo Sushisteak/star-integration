@@ -94,7 +94,12 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         if user_input is not None:
             _LOGGER.debug("Stop selected : %s", user_input[CONF_STOP])
-        
+            _LOGGER.debug("Config flow data before udpate : %s", self._config_flow_data)
+            self._config_flow_data.update({
+                CONF_STOP: CONF_STOP
+            })
+            _LOGGER.debug("Config flow data after udpate : %s", self._config_flow_data)
+
         data_schema = vol.Schema({
             vol.Required(CONF_STOP): vol.In(stop_options),
         })
