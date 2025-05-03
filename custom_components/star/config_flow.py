@@ -79,7 +79,6 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         
         return self.async_show_form(
             step_id="direction",
-            menu_options=["user"],
             data_schema=data_schema
         )
     
@@ -102,6 +101,5 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         return self.async_show_form(
             step_id="stop",
-            menu_options=["user", "direction"],
             data_schema=data_schema
         )
