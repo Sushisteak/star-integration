@@ -18,8 +18,12 @@
                 }
             },
             "direction": {
-                "title": "Sens de le ligne",
+                "title": "Choix du sens de le ligne",
                 "description": "Séléctionnez la direction de la ligne."
+            },
+            "stop": {
+                "title": "Choix de larrêt",
+                "stop": "Séléctionnez l'arrêt pour lequel récupérer les horaires."
             }
         }
     }
