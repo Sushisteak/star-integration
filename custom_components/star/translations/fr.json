@@ -4,7 +4,7 @@
         "step": {
             "user": {
                 "title": "Configuration générale",
-                "description": "Entrez votre clé API et sélectionnez la ligne de bus.",
+                "description": "Entrez votre clé API, choisissez une fréquence de mise à jour et sélectionnez la ligne de bus.",
                 "data": {
                     "api_key": "Clé API",
                     "update_interval": "Fréquence de mise à jour",
