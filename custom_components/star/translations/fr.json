@@ -22,8 +22,8 @@
                 "description": "Séléctionnez la direction de la ligne."
             },
             "stop": {
-                "title": "Choix de larrêt",
-                "stop": "Séléctionnez l'arrêt pour lequel récupérer les horaires."
+                "title": "Choix de l'arrêt",
+                "description": "Séléctionnez l'arrêt pour lequel récupérer les horaires."
             }
         }
     }
