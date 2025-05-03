@@ -41,7 +41,7 @@ class StarApi():
                 ]
 
     # Récupération des arrêts de la ligne choisie pour l'étape 3
-    async def _fetch_stops(self, idparcours: str) -> list[str]:
+    async def _fetch_stops(idparcours: str) -> list[str]:
         """Call STAR API to get all stops of one line."""
         _LOGGER.debug("Fetching stops for parcours: %s", idparcours)
         async with aiohttp.ClientSession() as session:
