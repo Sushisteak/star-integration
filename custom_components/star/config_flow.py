@@ -36,7 +36,7 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         data_schema = vol.Schema({
                 vol.Required(CONF_API_KEY): str,
-                vol.Optional(CONF_UPDATE_INTERVAL): int,
+                vol.Optional(CONF_UPDATE_INTERVAL, default=DEFAULT_UPDATE_INTERVAL): int,
                 vol.Required(CONF_BUS_NUMBER): vol.In(options),
             })
 
