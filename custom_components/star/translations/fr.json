@@ -34,7 +34,7 @@
                     "stop": "Nom de l'arrêt"
                 },
                 "data_description": {
-                    "stop": "Tous les arrêts de la ligne, et de la direction choisie (certains arrêts ne sont pas disponibles en fonction de la direction)."
+                    "stop": "Tous les arrêts de la ligne dans la direction choisie (certains arrêts ne sont pas disponibles en fonction de la direction)."
                 }
             }
         }
