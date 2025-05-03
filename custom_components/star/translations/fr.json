@@ -7,14 +7,14 @@
                 "description": "Entrez votre clé API et sélectionnez la ligne de bus.",
                 "data": {
                     "api_key": "Clé API",
-                    "bus_number": "Ligne",
-                    "update_interval": "Fréquence de mise à jour"
+                    "update_interval": "Fréquence de mise à jour",
+                    "bus_number": "Ligne"
 
                 },
                 "data_description": {
                     "api_key": "Clé fournie par l’API STAR pour accéder aux horaires. Se rendre sur https://data.explore.star.fr pour en obtenir une.",
-                    "bus_number": "Nom de la ligne de bus (ex : C4, C5…).",
-                    "update_interval": "Fréquence de mise à jour en seconde. Ce n'est pas utile de mettre en dessous de 30 secondes, les données du STAR sont mises à jour toutes les minutes."
+                    "update_interval": "Fréquence de mise à jour en seconde. Ce n'est pas utile de mettre en dessous de 30 secondes, les données du STAR sont mises à jour toutes les minutes.",
+                    "bus_number": "Nom de la ligne de bus (ex : C4, C5…)."
                 }
             }
         }
