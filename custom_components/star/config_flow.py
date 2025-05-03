@@ -84,4 +84,5 @@ class StarConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     # Etape 3 - Selection arret
     async def async_step_stop(self, user_input=None):
         """Get the stop of the line to monitor."""
+        _LOGGER.debug("in async_step_stop function")
         errors = {}
